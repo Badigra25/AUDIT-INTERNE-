@@ -583,7 +583,22 @@ tr:hover td {
             <h2>Espace Audit Interne<br>Veuillez entrer vos identifiants</h2>
             <form id="loginForm" class="login-form">
                 <input type="text" id="username" placeholder="Nom d'utilisateur" required>
-                <input type="password" id="password" placeholder="Mot de passe" required>
+                <div style="position:relative;width:100%;max-width:370px;">
+  <input type="password" id="password" placeholder="Mot de passe" required style="padding-right:40px;">
+  <span id="togglePassword" style="
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#2341a7;
+    font-size:1.2em;
+    z-index:2;
+  ">
+    <i class="fa-solid fa-eye" id="eyeOpen"></i>
+    <i class="fa-solid fa-eye-slash hidden" id="eyeClosed"></i>
+  </span>
+</div>
                 <button type="submit">Se connecter</button>
                 <div id="loginError" class="login-error"></div>
             </form>
@@ -1029,6 +1044,22 @@ function updateStats(data) {
     document.getElementById('diffuse-reports').textContent = diffusedReports;
     document.getElementById('non-diffuse-reports').textContent = nonDiffusedReports;
 }
+    const passwordInput = document.getElementById('password');
+const togglePassword = document.getElementById('togglePassword');
+const eyeOpen = document.getElementById('eyeOpen');
+const eyeClosed = document.getElementById('eyeClosed');
+
+togglePassword.addEventListener('click', () => {
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    eyeOpen.classList.add('hidden');
+    eyeClosed.classList.remove('hidden');
+  } else {
+    passwordInput.type = 'password';
+    eyeOpen.classList.remove('hidden');
+    eyeClosed.classList.add('hidden');
+  }
+});
 </script>
 </body>
 </html>
