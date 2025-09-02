@@ -938,11 +938,20 @@ function exportToPdf(dataToExport) {
             td.style.wordBreak = "break-word";
             td.style.textAlign = "center";
             td.style.width = "200px";
-            if(index===9) {
-                td.style.background = "#28a745";
+            
+            // CORRECTED LOGIC FOR STATUS (INDEX 9)
+            if(index === 9) {
+                const status = String(cellData || '').toLowerCase().trim();
+                if (status === 'r' || status === 'réalisé' || status === 'réalisée') {
+                    td.style.background = "#28a745"; // Green for realized
+                } else if (status === 'nr' || status === 'non réalisé' || status === 'non réalisée') {
+                    td.style.background = "#dc3545"; // Red for not realized
+                }
                 td.style.color = "#fff";
                 td.style.fontWeight = "bold";
-            } else if(index===10) {
+            } 
+            // LOGIC FOR REPORT STATUS (INDEX 10)
+            else if(index === 10) {
                 const rapportStatus = String(cellData || '').toLowerCase().trim();
                 td.style.fontWeight = "bold";
                 if (rapportStatus === 'diffusé') {
